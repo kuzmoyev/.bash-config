@@ -52,7 +52,6 @@ alias json_cat='python -m json.tool'
 alias nextsong='/usr/local/bin/spotifycli --status && /usr/local/bin/spotifycli --next || spotify'
 
 # git
-source /usr/share/bash-completion/completions/git
 alias    g="'git'"
 alias   ga='g add'
 alias  gaa='g add --all'

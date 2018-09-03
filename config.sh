@@ -5,5 +5,5 @@ curl -o ~/.git-prompt.sh 'https://raw.githubusercontent.com/git/git/master/contr
 if [ "$(uname)" == "Darwin" ]; then
     cp .bash_profile ~/
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
-    echo 'source ~/.bash-config/bashrc' > ~/.bashrc
+    cp .bashrc ~/
 fi
