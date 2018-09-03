@@ -121,6 +121,4 @@ fi
 export GIT_PS1_SHOWDIRTYSTATE=1
 export PS1='\[\033[01;34m\]$([[ ! -d .git ]] && echo "\w" || echo "\W")\[\033[00m\] $(__git_ps1 "[\[\033[01;33m\]%s\[\033[00m\]] ")\$ '
 
-
-# added by Anaconda3 installer
-export PATH="/home/yevhen/.anaconda3/bin:$PATH"
+source ~/.git-prompt.sh

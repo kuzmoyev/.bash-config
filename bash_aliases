@@ -1,5 +1,5 @@
 # ls
-alias ls="ls -Isnap --color=auto"
+alias ls="ls"
 alias ll="ls -l"
 alias la="ls -a"
 alias l="ls"
