@@ -1,5 +1,9 @@
 # ls
-alias ls="ls"
+if [ "$(uname)" == "Darwin" ]; then
+    alias ls="ls -G"
+elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
+    alias ls="ls --color=auto"
+fi
 alias ll="ls -l"
 alias la="ls -a"
 alias l="ls"
