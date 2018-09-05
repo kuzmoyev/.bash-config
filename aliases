@@ -12,6 +12,7 @@ function cd {
 }
 alias ..="cd .."
 alias ...="cd ../../"
+alias -- -="cd -"
 
 # extract from archive
 extract () {

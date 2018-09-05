@@ -119,6 +119,21 @@ fi
 
 
 export GIT_PS1_SHOWDIRTYSTATE=1
-export PS1='\[\033[01;34m\]$([[ ! -d .git ]] && echo "\w" || echo "\W")\[\033[00m\] $(__git_ps1 "[\[\033[01;33m\]%s\[\033[00m\]] ")\$ '
+#export PS1='\[\033[01;34m\]$([[ ! -d .git ]] && echo "\w" || echo "\W")\[\033[00m\] $(__git_ps1 "[\[\033[01;33m\]%s\[\033[00m\]] ")\$ '
+#export PS1='\[\033[01;34m\]$([[ ! -d .git ]] && echo "\w" || echo "\W")\[\033[00m\] $(__git_ps1 "[\[\033[01;33m\]%s\[\033[00m\]] ")$([[ $? -eq 0 ]] && echo ":)" || echo ":(") '
+
+
+PROMPT_COMMAND=__prompt_command
+
+__prompt_command() {
+	local EXIT="$?"
+	export PS1='\[\033[01;34m\]$([[ ! -d .git ]] && echo "\w" || echo "\W")\[\033[00m\] $(__git_ps1 "[\[\033[01;33m\]%s\[\033[00m\]] ")'
+	if [ $EXIT == 0 ]; then
+		PS1+=":) "
+	else
+		PS1+=":( "
+	fi
+}
+
 
 source ~/.git-prompt.sh
