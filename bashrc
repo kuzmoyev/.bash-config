@@ -70,20 +70,34 @@ fi
 
 
 
+# Reset
+NONE='\033[0m'       # Text Reset
+
+# Regular Colors
+BLACK='\033[0;30m'        # Black
+RED='\033[0;31m'          # Red
+GREEN='\033[0;32m'        # Green
+YELLOW='\033[0;33m'       # Yellow
+BLUE='\033[0;34m'         # Blue
+PURPLE='\033[0;35m'       # Purple
+CYAN='\033[0;36m'         # Cyan
+WHITE='\033[0;37m'        # White
+
 export GIT_PS1_SHOWDIRTYSTATE=1
-#export PS1='\[\033[01;34m\]$([[ ! -d .git ]] && echo "\w" || echo "\W")\[\033[00m\] $(__git_ps1 "[\[\033[01;33m\]%s\[\033[00m\]] ")\$ '
-#export PS1='\[\033[01;34m\]$([[ ! -d .git ]] && echo "\w" || echo "\W")\[\033[00m\] $(__git_ps1 "[\[\033[01;33m\]%s\[\033[00m\]] ")$([[ $? -eq 0 ]] && echo ":)" || echo ":(") '
 
 
 PROMPT_COMMAND=__prompt_command
-
 __prompt_command() {
-	local EXIT="$?"
-	export PS1='\[\033[01;34m\]$([[ ! -d .git ]] && echo "\w" || echo "\W")\[\033[00m\] $(__git_ps1 "[\[\033[01;33m\]%s\[\033[00m\]] ")'
-	if [ $EXIT == 0 ]; then
-		PS1+=":) "
+	local EXIT_CODE="$?"
+	local CURRENT_FOLDER="${BLUE}$([[ ! -d .git ]] && echo "\w" || echo "\W")${NONE}"
+	local GIT="$(__git_ps1 "[${YELLOW}%s${NONE}] ")"
+	
+	PS1="${CURRENT_FOLDER} ${GIT}"
+
+	if [ $EXIT_CODE == 0 ]; then
+		PS1+="✔ "
 	else
-		PS1+=":( "
+		PS1+="✖ "
 	fi
 }
 
