@@ -4,11 +4,11 @@ if [ "$(uname)" == "Darwin" ]; then
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     alias ls="ls --color=auto"
 fi
-alias ll="ls -l"
+alias ll="ls -lh"
 alias la="ls -a"
 alias l="ls"
-alias lla="ls -la"
-alias lal="ls -la"
+alias lla="ls -lha"
+alias lal="ls -lha"
 
 # cd
 function cd {
