@@ -51,7 +51,7 @@ alias pingg="ping google.com -c 2"
 alias run='xdg-open'
 alias ports='sudo netstat -tulpn | grep LISTEN'
 alias json_cat='python -m json.tool'
-
+alias hist='history | grep'
 
 # spotify
 alias nextsong='/usr/local/bin/spotifycli --status && /usr/local/bin/spotifycli --next || spotify'
