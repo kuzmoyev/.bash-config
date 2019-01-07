@@ -92,7 +92,14 @@ __prompt_command() {
 	local CURRENT_FOLDER="${BLUE}$([[ ! -d .git ]] && echo "\w" || echo "\W")${NONE}"
 	local GIT="$(__git_ps1 "[${YELLOW}%s${NONE}] ")"
 	
-	PS1="${CURRENT_FOLDER} ${GIT}"
+    local VENV=${VIRTUAL_ENV##*/}
+    PS1=""
+
+    if [ "$VENV" != "" ]; then
+    	PS1+="($GREEN$VENV$NONE) "
+    fi
+
+	PS1+="${CURRENT_FOLDER} ${GIT}"
 
 	if [ $EXIT_CODE == 0 ]; then
 		PS1+="✔ "
