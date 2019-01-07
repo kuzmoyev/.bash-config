@@ -130,7 +130,8 @@ alias pipi='pip install'
 alias pipu='pip uninstall'
 alias pipiu='pipi --upgrade'
 alias pipiup='pipiu pip'
-
+alias pipf='pip freeze'
+alias pipfr='pipf > requirements.txt'
 
 
 
