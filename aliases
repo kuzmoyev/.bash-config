@@ -136,12 +136,21 @@ alias pipfr='pipf > requirements.txt'
 
 
 # find
-FIND() { find . -type "$1" -name "$2"  2>/dev/null; }
+FIND() {
+    TYPES_LIST=($1)
+    TYPES="\( -type ${TYPES_LIST[0]}"
+    for t in "${TYPES_LIST[@]:1}"; do
+        TYPES+=" -o -type $t"
+    done
+    TYPES+=" \)"
+
+    find . "$TYPES" -name "$2"  2>/dev/null;
+}
 # find anything
-f   () { FIND 'd,f' "$@"   ;}  # Find
-fq  () { FIND 'd,f' "*$@*" ;}  # Find by query
-fs  () { FIND 'd,f' "$@*"  ;}  # Find starts with
-fe  () { FIND 'd,f' "*$@"  ;}  # Find ends with
+f   () { FIND 'd f' "$@"   ;}  # Find
+fq  () { FIND 'd f' "*$@*" ;}  # Find by query
+fs  () { FIND 'd f' "$@*"  ;}  # Find starts with
+fe  () { FIND 'd f' "*$@"  ;}  # Find ends with
 # find file
 ff  () { FIND 'f' "$@"     ;}  # Find file
 ffq () { FIND 'f' "*$@*"   ;}  # Find file by query
