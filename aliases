@@ -1,8 +1,10 @@
 # ls
 if [ "$(uname)" == "Darwin" ]; then
     alias ls="ls -G"
+    alias run='open'
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     alias ls="ls --color=auto"
+    alias run='xdg-open'
 fi
 alias ll="ls -lh"
 alias la="ls -a"
@@ -48,7 +50,6 @@ alias aptp='sudo apt install $(history -p !:0)'
 # other
 alias c="clear"
 alias pingg="ping google.com -c 2"
-alias run='xdg-open'
 alias ports='sudo netstat -tulpn | grep LISTEN'
 alias json_cat='python -m json.tool'
 alias hist='history | grep'
