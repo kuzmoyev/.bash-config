@@ -88,24 +88,29 @@ export GIT_PS1_SHOWDIRTYSTATE=1
 
 PROMPT_COMMAND=__prompt_command
 __prompt_command() {
-	local EXIT_CODE="$?"
-	local CURRENT_FOLDER="${BLUE}$([[ ! -d .git ]] && echo "\w" || echo "\W")${NONE}"
-	local GIT="$(__git_ps1 "[${YELLOW}%s${NONE}] ")"
+    local EXIT_CODE="$?"
+    local CURRENT_FOLDER="${BLUE}$([[ ! -d .git ]] && echo "\w" || echo "\W")${NONE}"
+    local GIT="$(__git_ps1 "[${YELLOW}%s${NONE}] ")"
 	
     local VENV=${VIRTUAL_ENV##*/}
-    PS1=""
 
-    if [ "$VENV" != "" ]; then
-    	PS1+="($GREEN$VENV$NONE) "
+    PS1=""
+    
+    if [ -f ~/.bash-config/machine_name ]; then
+        PS1+="[`cat ~/.bash-config/machine_name`] "
     fi
 
-	PS1+="${CURRENT_FOLDER} ${GIT}"
+    if [ "$VENV" != "" ]; then
+        PS1+="($GREEN$VENV$NONE) "
+    fi
 
-	if [ $EXIT_CODE == 0 ]; then
-		PS1+="✔ "
-	else
-		PS1+="✖ "
-	fi
+    PS1+="${CURRENT_FOLDER} ${GIT}"
+
+    if [ $EXIT_CODE == 0 ]; then
+        PS1+="✔ "
+    else
+        PS1+="✖ "
+    fi
 }
 
 
