@@ -78,6 +78,9 @@ alias   gs='g status'
 alias   gr='g reset'
 alias  grh='g reset --hard'
 alias grhf='g checkout HEAD --'
+alias  gr1='g reset HEAD^'
+alias  gr2='g reset HEAD^'
+alias  gr3='g reset HEAD^'
 alias grh1='g reset --hard HEAD^'
 alias grh2='g reset --hard HEAD^^'
 alias grh3='g reset --hard HEAD^^^'
@@ -108,6 +111,9 @@ __git_complete glg	_git_log
 __git_complete gr	_git_reset
 __git_complete grh	_git_reset
 __git_complete grhf	_git_reset
+__git_complete gr1	_git_reset
+__git_complete gr2	_git_reset
+__git_complete gr3	_git_reset
 __git_complete grh1	_git_reset
 __git_complete grh2	_git_reset
 __git_complete grh3	_git_reset
