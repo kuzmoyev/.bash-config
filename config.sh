@@ -5,6 +5,12 @@ if [ $# -eq 1 ]; then
 fi
 
 if [ "$(uname)" == "Darwin" ]; then
+    
+    # install brew
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    
+    brew install bash-completion
+    
     cp .bash_profile ~/
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     cp .bashrc ~/

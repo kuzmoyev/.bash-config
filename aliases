@@ -61,6 +61,7 @@ alias nextsong='/usr/local/bin/spotifycli --status && /usr/local/bin/spotifycli 
 alias    g="'git'"
 alias   ga='g add'
 alias  gaa='g add --all'
+alias  gau='g add -u'
 alias   gc='g commit'
 alias  gcm='g commit -m'
 alias  gca='g commit --amend'
@@ -125,7 +126,7 @@ alias   gi='g init'
 
 alias python='python3'
 # virtualenv
-alias nvnv='virtualenv -p /usr/bin/python3.6 venv'
+alias nvnv='virtualenv -p $(which python3) venv'
 alias vnv='. venv/bin/activate'
 # anaconda
 alias cnd='. activate ${PWD##*/}'
@@ -135,6 +136,7 @@ alias rcnd='conda remove --name ${PWD##*/} --all'
 # jupyter
 alias jn='jupyter notebook'
 # pip
+alias pip='pip3'
 alias pipi='pip install'
 alias pipu='pip uninstall'
 alias pipiu='pipi --upgrade'
