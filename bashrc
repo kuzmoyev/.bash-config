@@ -8,16 +8,9 @@ esac
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
 
-# append to the history file, don't overwrite it
-shopt -s histappend
-
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=1000
 HISTFILESIZE=2000
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -53,44 +46,62 @@ fi
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
 
-if [ -f ~/.bash-config/aliases ]; then
-    . ~/.bash-config/aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
-    . /usr/share/bash-completion/bash_completion
-  elif [ -f /etc/bash_completion ]; then
-    . /etc/bash_completion
-  fi
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+  . /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+  . /etc/bash_completion
 fi
 
 
+if [ $SHELL = '/bin/zsh' ]; then
+    autoload -U colors && colors
+    # Reset
+    NONE='%{$reset_color%}'      # Text Reset
+    # Regular Colors
+    BLACK='%{$fg[black]%}'       # Black
+    RED='%{$fg[red]%}'           # Red
+    GREEN='%{$fg[green]%}'       # Green
+    YELLOW='%{$fg[yellow]%}'     # Yellow
+    BLUE='%{$fg[blue]%}'         # Blue
+    # PURPLE=''                  # Purple
+    CYAN='%{$fg[cyan]%}'         # Cyan
+    WHITE='%{$fg[white]%}'       # White
 
-# Reset
-NONE='\[\033[0m\]'       # Text Reset
+    WORK_DIR='%~'
+    WORK_DIR_SHORT='%~'
 
-# Regular Colors
-BLACK='\[\033[0;30m\]'        # Black
-RED='\[\033[0;31m\]'          # Red
-GREEN='\[\033[0;32m\]'        # Green
-YELLOW='\[\033[0;33m\]'       # Yellow
-BLUE='\[\033[0;34m\]'         # Blue
-PURPLE='\[\033[0;35m\]'       # Purple
-CYAN='\[\033[0;36m\]'         # Cyan
-WHITE='\[\033[0;37m\]'        # White
+    setopt PROMPT_SUBST
+else
+    # Reset
+    NONE='\[\033[0m\]'            # Text Reset
+    # Regular Colors
+    BLACK='\[\033[0;30m\]'        # Black
+    RED='\[\033[0;31m\]'          # Red
+    GREEN='\[\033[0;32m\]'        # Green
+    YELLOW='\[\033[0;33m\]'       # Yellow
+    BLUE='\[\033[0;34m\]'         # Blue
+    PURPLE='\[\033[0;35m\]'       # Purple
+    CYAN='\[\033[0;36m\]'         # Cyan
+    WHITE='\[\033[0;37m\]'        # White
+
+    WORK_DIR='\W'
+    WORK_DIR_SHORT='\w'
+fi
 
 export GIT_PS1_SHOWDIRTYSTATE=1
+
+
+source ~/.git-prompt.sh
 
 
 PROMPT_COMMAND=__prompt_command
 __prompt_command() {
     local EXIT_CODE="$?"
-    local CURRENT_FOLDER="${BLUE}$([[ ! -d .git ]] && echo "\w" || echo "\W")${NONE}"
-    local GIT="$(__git_ps1 "[${YELLOW}%s${NONE}] ")"
+    local CURRENT_FOLDER="${BLUE}$([[ ! -d .git ]] && echo "${WORK_DIR_SHORT}" || echo "${WORK_DIR}")${NONE}"
+    local GIT="$(__git_ps1 "%s")"
 	
     local VENV=${VIRTUAL_ENV##*/}
 
@@ -101,23 +112,27 @@ __prompt_command() {
     fi
 
     if [ "$VENV" != "" ]; then
-        PS1+="($GREEN$VENV$NONE) "
+        PS1+="(${GREEN}${VENV}${NONE}) "
     fi
 
-    PS1+="${CURRENT_FOLDER} ${GIT}"
+    PS1+="${CURRENT_FOLDER} "
 
-    if [ $EXIT_CODE == 0 ]; then
+
+    if [ "$GIT" != "" ]; then
+        PS1+="[${YELLOW}${GIT}${NONE}] "
+    fi
+
+    if [ $EXIT_CODE = 0 ]; then
         PS1+="✔ "
     else
-        PS1+="✖ "
+        PS1+="${RED}✖${NONE} "
     fi
 }
+precmd() { eval "$PROMPT_COMMAND" }
 
 
-source ~/.git-prompt.sh
 
+if [ -f ~/.bash-config/aliases ]; then
+    . ~/.bash-config/aliases
+fi
 
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
