@@ -137,6 +137,7 @@ alias ncnd='ncndb numpy pandas'
 alias rcnd='conda remove --name ${PWD##*/} --all'
 # jupyter
 alias jn='jupyter notebook'
+alias jl='jupyter lab'
 # pip
 alias pip='pip3'
 alias pipi='pip install'
