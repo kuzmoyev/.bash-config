@@ -93,53 +93,17 @@ alias   gcln='g clone'
 alias    gra='g remote add origin'
 alias     gi='g init'
 
-# alias  git='notify-send -t 1000 "USE ALIASES, YOU $(shuf -n 1 ~/.insults)!"; git'
-
-# __git_complete g	_git
-# __git_complete ga	_git_add
-# __git_complete gaa	_git_add
-# __git_complete gc	_git_commit
-# __git_complete gcm	_git_commit
-# __git_complete gca	_git_commit
-# __git_complete go	_git_checkout
-# __git_complete gob	_git_checkout
-# __git_complete gb	_git_branch
-# __git_complete gm	_git_merge
-# __git_complete gmf	_git_merge
-# __git_complete gp	_git_push
-# __git_complete gpo	_git_push
-# __git_complete gpf	_git_push
-# __git_complete gpl	_git_pull
-# __git_complete gl	_git_log
-# __git_complete glg	_git_log
-# __git_complete gr	_git_reset
-# __git_complete grh	_git_reset
-# __git_complete grhf	_git_reset
-# __git_complete gr1	_git_reset
-# __git_complete gr2	_git_reset
-# __git_complete gr3	_git_reset
-# __git_complete grh1	_git_reset
-# __git_complete grh2	_git_reset
-# __git_complete grh3	_git_reset
-# __git_complete grfl	_git_reflog
-# __git_complete gcln	_git_clone
-# __git_complete gra	_git_remote
-
 
 alias python='python3'
-# virtualenv
-alias nvnv='virtualenv -p $(which python3) venv'
-alias vnv='. venv/bin/activate'
-# anaconda
-alias cnd='. activate ${PWD##*/}'
-alias ncndb='conda create -n ${PWD##*/}'
-alias ncnd='ncndb numpy pandas'
-alias rcnd='conda remove --name ${PWD##*/} --all'
+alias p='python3'
+# virtualenv (uses uv)
+alias nvnv='uv venv'
+alias vnv='. .venv/bin/activate'
 # jupyter
 alias jn='jupyter notebook'
 alias jl='jupyter lab'
-# pip
-alias pip='pip3'
+# pip (uses uv)
+alias pip='uv pip'
 alias pipi='pip install'
 alias pipu='pip uninstall'
 alias pipiu='pipi --upgrade'
@@ -147,6 +111,17 @@ alias pipiup='pipiu pip'
 alias pipf='pip freeze'
 alias pipfr='pipf > requirements.txt'
 alias pipir='pipi -r requirements.txt'
+# UV
+alias uvi='uv init'
+alias uvr='uv run'
+alias uva='uv add'
+alias uvrm='uv remove'
+
+# anaconda
+alias cnd='. activate ${PWD##*/}'
+alias ncndb='conda create -n ${PWD##*/}'
+alias ncnd='ncndb numpy pandas'
+alias rcnd='conda remove --name ${PWD##*/} --all'
 
 
 # find

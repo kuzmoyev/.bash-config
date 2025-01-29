@@ -18,3 +18,6 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     curl -o ~/.git-prompt.sh 'https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh'
     cp .bashrc ~/
 fi
+
+# Install UV
+curl -LsSf https://astral.sh/uv/install.sh | sh
