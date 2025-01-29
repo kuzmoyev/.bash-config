@@ -1,4 +1,1 @@
-[ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
-
-source ~/.bash-config/bashrc
-
+source ~/.bash-config/bashrc.sh

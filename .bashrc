@@ -1,3 +1,2 @@
 source /usr/share/bash-completion/completions/git
-
-source ~/.bash-config/bashrc
+source ~/.bash-config/bashrc.sh
