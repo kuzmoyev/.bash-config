@@ -111,7 +111,7 @@ __prompt_command() {
         PS1+="[`cat ~/.bash-config/machine_name`] "
     fi
 
-    if [ "$VENV" != "" ]; then
+    if [ "$VENV" != "" ] && [ "$PWD" != "$HOME" ]; then
         PS1+="(${GREEN}${VENV}${NONE}) "
     fi
 
@@ -131,8 +131,14 @@ __prompt_command() {
 precmd() { eval "$PROMPT_COMMAND" }
 
 
-
-if [ -f ~/.bash-config/aliases ]; then
-    . ~/.bash-config/aliases
+if [ -f ~/.bash-config/aliases.sh ]; then
+    . ~/.bash-config/aliases.sh
 fi
 
+if [ "$PWD" = "$HOME" ]; then
+    if [ -d '.venv' ]; then
+        vnv
+    else
+        echo "No virtual python environment found. Create one with 'nvnv'"
+    fi
+fi

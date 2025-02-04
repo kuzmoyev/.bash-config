@@ -12,7 +12,7 @@ if [ "$(uname)" = "Darwin" ]; then
     # install oh-my-zsh
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-    echo '. ~/.bash-config/aliases' >> ~/.zshrc
+    echo '. ~/.bash-config/aliases.sh' >> ~/.zshrc
 
 elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
     curl -o ~/.git-prompt.sh 'https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh'
@@ -21,3 +21,5 @@ fi
 
 # Install UV
 curl -LsSf https://astral.sh/uv/install.sh | sh
+# Create global python environment
+uv venv

@@ -94,8 +94,8 @@ alias    gra='g remote add origin'
 alias     gi='g init'
 
 
-alias python='python3'
-alias p='python3'
+alias python='.venv/bin/python'
+alias p='python'
 # virtualenv (uses uv)
 alias nvnv='uv venv'
 alias vnv='. .venv/bin/activate'
