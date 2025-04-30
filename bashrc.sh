@@ -142,3 +142,6 @@ if [ "$PWD" = "$HOME" ]; then
         echo "No virtual python environment found. Create one with 'nvnv'"
     fi
 fi
+
+# Update zsh automatically
+DISABLE_UPDATE_PROMPT=true
